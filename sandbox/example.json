@@ -1,0 +1,107 @@
+[
+    {
+        "id": "c3e13dfe.ac74c",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "b714376b.eb3228",
+        "type": "inject",
+        "z": "c3e13dfe.ac74c",
+        "name": "Input bookstore",
+        "topic": "",
+        "payload": "{\"items\":[{\"id\":\"books0\",\"zero\":0,\"sku\":\"00234-12312\",\"subitems\":[{\"subid\":\"0.0\",\"subsku\":\"subskuvalue0.0\"},{\"subid\":\"0.1\",\"subsku\":\"subskuvalue0.1\"}]},{\"info\":\"bal\",\"id\":\"books1\",\"zero\":1,\"sku\":\"10234-12312\",\"subitems\":[{\"subid\":\"1.0\",\"subsku\":\"subskuvalue1.0\"},{\"subid\":\"1.1\",\"subsku\":\"subskuvalue1.1\"}]}]}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 180,
+        "y": 100,
+        "wires": [
+            [
+                "55271744.951c78"
+            ]
+        ]
+    },
+    {
+        "id": "87f39387.17cc5",
+        "type": "debug",
+        "z": "c3e13dfe.ac74c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 610,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "f325902b.bd8e7",
+        "type": "http in",
+        "z": "c3e13dfe.ac74c",
+        "name": "",
+        "url": "transform",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 60,
+        "wires": [
+            [
+                "55271744.951c78"
+            ]
+        ]
+    },
+    {
+        "id": "9181b2fd.704f9",
+        "type": "http response",
+        "z": "c3e13dfe.ac74c",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 770,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "7f731def.2b3374",
+        "type": "template",
+        "z": "c3e13dfe.ac74c",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "{{#payload}}\nSKU: {{mysku}}\nID: {{myid}}\n{{/payload}}",
+        "output": "str",
+        "x": 620,
+        "y": 60,
+        "wires": [
+            [
+                "9181b2fd.704f9"
+            ]
+        ]
+    },
+    {
+        "id": "55271744.951c78",
+        "type": "transform",
+        "z": "c3e13dfe.ac74c",
+        "name": "",
+        "map": "{\"list\":\"items\",\"item\":{\"myid\":\"id\",\"mysku\":\"sku\",\"mysubitems\":\"subitems\"},\"remove\":[\"unwanted\"],\"defaults\":{\"missingData\":true}}",
+        "mapType": "json",
+        "x": 440,
+        "y": 80,
+        "wires": [
+            [
+                "87f39387.17cc5",
+                "7f731def.2b3374"
+            ]
+        ]
+    }
+]
