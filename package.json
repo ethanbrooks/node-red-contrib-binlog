@@ -33,7 +33,7 @@
     "@types/node-red": "^0.20.0",
     "@types/should": "^13.0.0",
     "cpx": "^1.5.0",
-    "mocha": "^6.1.4",
+    "mocha": "^10.2.0",
     "mocha-junit-reporter": "^1.23.0",
     "node-red": "^0.20.5",
     "node-red-node-test-helper": "^0.2.2",
